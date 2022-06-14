@@ -1,20 +1,56 @@
 package com.generation.models;
 
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name="usuarios")
+
 public class Usuario {
     //atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Size(min = 3,max = 20)//limita la cantidad de caracteres
     private String nombre;
+    @Size(min = 3,max = 20)
     private String apellido;
     private Integer edad;
+    @NotNull
+    @Size(min = 6,max = 8)
+    private String password;
+
     //constructores
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, Integer edad) {
+    public Usuario(String nombre, String apellido, Integer edad, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
+        this.password = password;
     }
     //getter y setter
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;

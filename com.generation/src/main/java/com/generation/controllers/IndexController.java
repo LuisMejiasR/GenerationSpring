@@ -18,7 +18,7 @@ public class IndexController {
         model.addAttribute("edad",28);
 
         //instanciamos el objeto usuario:
-        Usuario usuario = new Usuario("Teresa","Bettoni",27);
+        Usuario usuario = new Usuario("Teresa","Bettoni",27, "1234");
         //pasamos el objeto a la vista:
         model.addAttribute("usuario", usuario);
 

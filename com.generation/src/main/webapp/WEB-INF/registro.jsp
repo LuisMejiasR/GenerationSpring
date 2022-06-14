@@ -15,7 +15,28 @@
 </head>
 <body>
     <div>
-        
+        <c:if test="${msgError!= null }">
+            <c:out value="${msgError }"></c:out>
+        </c:if>
+
+        <!-- esto se usa unicamente para trabajar con formularios -->
+        <%--@elvariable id="usuario" type="com.generation.models.Usuario"--%>
+        <form:form action="/registro/usuario" method="post" modelAttribute="usuario">
+            <form:label path="nombre">Nombre: </form:label>
+            <form:input path="nombre"/>
+            <br>
+            <form:label path="apellido">Apellido: </form:label>
+            <form:input path="apellido"/>
+            <br>
+            <form:label path="edad">Edad: </form:label>
+            <form:input type ="number" path="edad"/>
+            <br> <!-- saldo de linea -->
+            <form:label path="password">Contraseña: </form:label>
+            <form:input path="password"/>
+            <br>
+            <!-- submit para el envío de información -->
+            <input type="submit" value="Registrar">
+        </form:form>
     </div>
 </body>
 </html>
