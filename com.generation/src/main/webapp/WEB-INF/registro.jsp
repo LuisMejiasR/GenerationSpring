@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
@@ -14,26 +15,7 @@
 </head>
 <body>
     <div>
-        <!-- pasar información desde la vista a una url(action)-->
-        <!-- el "method='get'" es por default, los parametros se ven en la ruta-->
-        <!-- con el "method='post'", los parametros NO se ven, van ocultos-->
-        <form action="" method="post">
-            <label for="nombre"> Nombre: </label>
-            <input type="text" id="nombre" name="nombre">
-            <br> <!-- saldo de linea -->
-            <label for="apellido"> Apellido: </label>
-            <input type="text" id="apellido" name="apellido">
-            <br> <!-- saldo de linea -->
-            <label for="edad"> Edad: </label>
-            <input type="number" id="edad" name="edad">
-            <br> <!-- saldo de linea -->
-            <!-- submit para el envío de información -->
-            <input type="submit" value="Registrar">
-            <br> <!-- saldo de linea -->
-            <!-- button es solo un boton clicleable -->
-            <input type="button" value="Enviar">
-
-        </form>
+        
     </div>
 </body>
 </html>
