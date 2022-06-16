@@ -1,6 +1,8 @@
 package com.generation.controllers;
 
 import com.generation.models.Usuario;
+import com.generation.services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/registro") //con este nos aseguramos que entren
 public class RegistroController {
+
+    //Inyeccion de dependencias (ACCEDER A LOS METODOS QUE EXISTEN EN LA CLASE)
+    @Autowired
+    UsuarioService usuarioService;
 
     //crear una ruta para desplegar el jsp, ruta por default
     @RequestMapping("")
@@ -34,9 +40,15 @@ public class RegistroController {
         if(resultado.hasErrors()){//capturando si existe un error en el ingreso de datos desde el jsp
             model.addAttribute("msgError", "Debe ingresar correctamente los datos");
             return "registro.jsp";
-        }
+        }else {
 
-        System.out.println(usuario.getNombre()+" "+usuario.getApellido()+ " "+ usuario.getEdad());
-        return "index.jsp";
+            //capturamos el objeto con los abrituos llenos
+            System.out.println(usuario.getNombre() + " " + usuario.getApellido() + " " + usuario.getEdad() + " " + usuario.getPassword());
+
+            //enviar el objeto al service
+            usuarioService.saveUsuario(usuario);
+
+            return "index.jsp";
+        }
     }
 }

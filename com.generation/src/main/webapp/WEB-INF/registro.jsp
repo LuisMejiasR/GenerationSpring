@@ -32,7 +32,7 @@
             <form:input type ="number" path="edad"/>
             <br> <!-- saldo de linea -->
             <form:label path="password">Contraseña: </form:label>
-            <form:input path="password"/>
+            <form:input type="password" path="password"/>
             <br>
             <!-- submit para el envío de información -->
             <input type="submit" value="Registrar">
