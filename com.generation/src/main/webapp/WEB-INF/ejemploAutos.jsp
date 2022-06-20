@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <html>
 <head>
     <title>Autos CSS</title>
@@ -27,6 +29,7 @@
                 <th scope="col">Modelo</th>
                 <th scope="col">Velocidad</th>
                 <th scope="col">Color</th>
+                <th scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +41,9 @@
                     <td>${auto.modelo}</td>
                     <td>${auto.velocidad}</td>
                     <td>${auto.color}</td>
+                    <td><a class="btn btn-warning" href="editar/${auto.id}" role="button">Editar</a></td>
+                    <td><a class="btn btn-danger" href="eliminar/${auto.id}" role="button">Eliminar</a></td>
+
                 </tr>
             </c:forEach>
 
