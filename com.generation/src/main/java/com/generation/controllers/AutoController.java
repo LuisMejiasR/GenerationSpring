@@ -87,12 +87,18 @@ public class AutoController {
             //y lo pasamos a service para que lo guarde
             autoService.saveAuto(auto);
 
-            //crear la lista de objetos para poderla mostrar en el jsp
-            List<Auto> listaAutos = autoService.findAll();
-            //con MODEL es que pasamos cosas al JSP
-            model.addAttribute("autosCapturados",listaAutos);
-            return "ejemploAutos.jsp";
+            //redirecciona a "mostrar" porque ya lo tenía escrito
+            return "redirect:/auto/mostrar";
         }
+    }
+
+    @RequestMapping("/eliminar/{id}")
+    public String eliminarAuto(@PathVariable("id") Long id){
+
+        autoService.eliminarPorId(id);
+
+        //redirecciona a "mostrar" porque ya lo tenía escrito
+        return "redirect:/registroauto/mostrar";
     }
 
 
