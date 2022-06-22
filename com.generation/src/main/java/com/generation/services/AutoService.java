@@ -17,7 +17,7 @@ public class AutoService {
         autoRepository.save(auto);
     }
 
-    //obtener la lista de autos
+    /*obtener la lista de autos*/
     public List<Auto> findAll() {
 
         return autoRepository.findAll();

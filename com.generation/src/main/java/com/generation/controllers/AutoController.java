@@ -40,7 +40,7 @@ public class AutoController {
             autoService.saveAuto(auto);
 
             //crear la lista de objetos para poderla mostrar en el jsp
-            List<Auto> listaAutos = autoService.findAll();
+            List<Auto> listaAutos = autoService.findAll();;
             //con MODEL es que pasamos cosas al JSP
             model.addAttribute("autosCapturados",listaAutos);
             return "ejemploAutos.jsp";
