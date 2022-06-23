@@ -4,6 +4,7 @@ package com.generation.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name="usuarios")
@@ -22,6 +23,11 @@ public class Usuario {
     @NotNull
     @Size(min = 6,max = 8)
     private String password;
+
+    @Column(updatable = false) //nos indica que esta columna no se puede actualizar por el sistema.
+    private Date createdAt;
+
+    private Date updatedAt;
 
     //constructores
     public Usuario() {
@@ -75,5 +81,15 @@ public class Usuario {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
+
     //funciones
 }

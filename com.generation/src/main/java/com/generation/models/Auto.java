@@ -1,6 +1,7 @@
 package com.generation.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="autos")
@@ -14,6 +15,11 @@ public class Auto {
     private String modelo;
     private String marca;
     private Double velocidad;
+
+    @Column(updatable = false) //nos indica que esta columna no se puede actualizar por el sistema.
+    private Date createdAt;
+
+    private Date updatedAt;
 
     //constructores
     public Auto() {
@@ -67,5 +73,15 @@ public class Auto {
     public void setVelocidad(Double velocidad) {
         this.velocidad = velocidad;
     }
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
+
     //funciones
 }
