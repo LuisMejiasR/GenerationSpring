@@ -48,7 +48,7 @@ public class RegistroController {
             //enviar el objeto al service
             usuarioService.saveUsuario(usuario);
 
-            return "index.jsp";
+            return "redirect:/registro";
         }
     }
 }

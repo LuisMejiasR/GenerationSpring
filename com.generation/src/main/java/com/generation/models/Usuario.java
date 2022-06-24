@@ -29,6 +29,11 @@ public class Usuario {
 
     private Date updatedAt;
 
+    //RELACIONAMOS OneToOne (tenemos que hacer la relación entre las dos siempre)
+    //con "usuario" relacionamos con el objeto de abajo.
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Licencia licencia;
+
     //constructores
     public Usuario() {
     }
@@ -80,6 +85,14 @@ public class Usuario {
 
     public void setEdad(Integer edad) {
         this.edad = edad;
+    }
+
+    public Licencia getLicencia() {
+        return licencia;
+    }
+
+    public void setLicencia(Licencia licencia) {
+        this.licencia = licencia;
     }
 
     @PrePersist

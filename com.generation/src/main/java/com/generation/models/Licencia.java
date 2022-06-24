@@ -1,5 +1,7 @@
 package com.generation.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,9 +13,17 @@ public class Licencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer numero;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date fechaVencimiento;
     private String clase;
-    private Boolean vencida;
+    @Column(length = 100)
+    private String vencida;
+
+    //RELACIONES 1 A 1 (OneToOne)
+    @OneToOne(fetch = FetchType.LAZY)//LAZY: por debajo trae lo que estamos relacionando, pero no los muestra automaticamente los datos, sino cuando la consultas
+    @JoinColumn(name = "usuario_id")//nombramos la FK, que sería la PK de la otra entidad
+    private Usuario usuario;
+
 
     //opcionales, sirven para gestion de base de datos
     @Column(updatable = false) //nos indica que esta columna no se puede actualizar por el sistema.
@@ -21,10 +31,12 @@ public class Licencia {
     private Date updatedAt;
     /*private Date deletedAt; -> fecha de eliminación logica (no lo borramos, solo le damos de baja)*/
 
+
+
     public Licencia() {
     }
 
-    public Licencia(Long id, Integer numero, Date fechaVencimiento, String clase, Boolean vencida) {
+    public Licencia(Long id, Integer numero, Date fechaVencimiento, String clase, String vencida) {
         this.id = id;
         this.numero = numero;
         this.fechaVencimiento = fechaVencimiento;
@@ -64,12 +76,20 @@ public class Licencia {
         this.clase = clase;
     }
 
-    public Boolean getVencida() {
+    public String getVencida() {
         return vencida;
     }
 
-    public void setVencida(Boolean vencida) {
+    public void setVencida(String vencida) {
         this.vencida = vencida;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     //Insertara en el atributo la fecha antes de insertar en la BD.
