@@ -5,31 +5,30 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "clientes")
-public class Cliente {
+@Table(name = "roles")
+public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
-    private String apellido;
-    private String email;
+    private String descripcion;
 
-    //OneToMany
-    @OneToMany(mappedBy ="cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CompraVenta> compraVentas;
+    //ManyToMany
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<Usuario> listaUsuarios;
 
-    @Column(updatable = false)
+    @Column(updatable = false) //nos indica que esta columna no se puede actualizar por el sistema.
     private Date createdAt;
+
     private Date updatedAt;
 
-    public Cliente() {
+    public Rol() {
     }
 
-    public Cliente(String nombre, String apellido, String email) {
+    public Rol(String nombre, String descripcion, List<Usuario> listaUsuarios) {
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
+        this.descripcion = descripcion;
+        this.listaUsuarios = listaUsuarios;
     }
 
     public Long getId() {
@@ -48,22 +47,22 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getEmail() {
-        return email;
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
-    //Insertara en el atributo la fecha antes de insertar en la BD.
+
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
@@ -72,4 +71,5 @@ public class Cliente {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+
 }
