@@ -2,6 +2,7 @@ package com.generation.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="autos")
@@ -15,25 +16,44 @@ public class Auto {
     private String modelo;
     private String marca;
     private Double velocidad;
+    private Float Valor;
 
+    //ManyToMany con autosComprasVentas
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "autos_compras_ventas",//nombre de la tabla relacional
+            joinColumns = @JoinColumn(name="auto_id"),//desde la entidad actual
+            inverseJoinColumns = @JoinColumn(name = "compra_venta_id")//la otra entidad o tabla
+    )
+    private List<CompraVenta> comprasVentas;
     @Column(updatable = false) //nos indica que esta columna no se puede actualizar por el sistema.
     private Date createdAt;
 
     private Date updatedAt;
 
     //constructores
+
     public Auto() {
     }
 
-    public Auto(Long id, String color, String modelo, String marca, Double velocidad) {
-        this.id = id;
+    //no se agrega el id, la creacion de fechas, ni la lista.
+    public Auto(String color, String modelo, String marca, Double velocidad, Float valor) {
         this.color = color;
         this.modelo = modelo;
         this.marca = marca;
         this.velocidad = velocidad;
+        Valor = valor;
     }
 
-    //set y get
+    public Auto(String color, String modelo, String marca, Double velocidad, Float valor, List<CompraVenta> listaComprasVentas) {
+        this.color = color;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.velocidad = velocidad;
+        Valor = valor;
+        this.comprasVentas = comprasVentas;
+    }
+
     public Long getId() {
         return id;
     }
@@ -72,6 +92,22 @@ public class Auto {
 
     public void setVelocidad(Double velocidad) {
         this.velocidad = velocidad;
+    }
+
+    public Float getValor() {
+        return Valor;
+    }
+
+    public void setValor(Float valor) {
+        Valor = valor;
+    }
+
+    public List<CompraVenta> getComprasVentas() {
+        return comprasVentas;
+    }
+
+    public void setComprasVentas(List<CompraVenta> comprasVentas) {
+        this.comprasVentas = comprasVentas;
     }
 
     @PrePersist

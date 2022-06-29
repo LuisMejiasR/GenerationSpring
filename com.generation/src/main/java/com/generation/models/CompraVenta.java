@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "comprasVentas")//recordar revisar la tabla
@@ -24,6 +25,14 @@ public class CompraVenta {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    //ManyToMany con autosComprasVentas
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "autos_compras_ventas",//nombre de la tabla relacional
+            joinColumns = @JoinColumn(name="compra_venta_id"),//desde la entidad actual
+            inverseJoinColumns = @JoinColumn(name = "auto_id")//la otra entidad o tabla
+    )
+    private List<Auto> autos;
     @Column(updatable = false)
     private Date createdAt;
     private Date updatedAt;

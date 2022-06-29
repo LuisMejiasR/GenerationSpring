@@ -27,6 +27,11 @@
 
             <input type="submit" value="Buscar" class="btn btn-primary">
         </form>
+        <br>
+        <!-- paginacion -->
+        <c:forEach var="numeroPagina" begin="1" end="${totalPaginas}">
+            <a href="/registroauto/pagina/${numeroPagina}">${numeroPagina}</a>
+        </c:forEach>
 
         <table class="table">
             <thead>
@@ -41,7 +46,7 @@
             </thead>
             <tbody>
 
-            <c:forEach var="auto" items="${autosCapturados}">
+            <c:forEach var="auto" items="${autosCapturados.content}">
                 <tr>
                     <th scope="row">${auto.id}</th>
                     <td>${auto.marca}</td>
